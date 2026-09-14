@@ -1,0 +1,3 @@
+*.exe
+gitleaks-hook
+secret_test.env
