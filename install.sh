@@ -2,7 +2,7 @@
 set -eu
 
 REPO="github.com/inezhinskiy/pre-commit-gitleaks"
-BINARY_PATH="cmd/gitleaks-hook"
+BINARY_PATH="./cmd/gitleaks-hook"
 
 echo "[install] Перевірка наявності Go..."
 if ! command -v go >/dev/null 2>&1; then
@@ -21,7 +21,8 @@ TMP_DIR="$(mktemp -d)"
 trap 'rm -rf "$TMP_DIR"' EXIT
 
 git clone --depth 1 "https://${REPO}.git" "$TMP_DIR/src"
-go build -o "$TARGET_REPO/.git/hooks/pre-commit" "$TMP_DIR/src/${BINARY_PATH}"
+
+( cd "$TMP_DIR/src" && go build -o "$TARGET_REPO/.git/hooks/pre-commit" "$BINARY_PATH" )
 chmod +x "$TARGET_REPO/.git/hooks/pre-commit"
 
 echo "[install] Увімкнення автоматичного встановлення gitleaks..."
