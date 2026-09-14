@@ -65,7 +65,7 @@ func installGitleaks() error {
 		}
 	}
 	if _, err := exec.LookPath("go"); err == nil {
-		return runShell("go install github.com/gitleaks/gitleaks/v8@latest")
+		return runShell("go install github.com/zricethezav/gitleaks/v8@latest")
 	}
 	return fmt.Errorf("не знайдено ні пакетного менеджера, ні Go — встанови gitleaks вручну")
 }
